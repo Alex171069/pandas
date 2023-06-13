@@ -33,7 +33,8 @@ class IP:
             self._tetra[3] = strIPAtom
        elif self._tetra[4] == 0:
             self._tetra[4] = strIPAtom
-       else:   
+       else: 
+            
           return str(self._tetra[4])+'.'+str(self._tetra[3])+'.'+str(self._tetra[2])+'.'+str(self._tetra[1])  # если все четыре тетрады не равны 0 то выводим всю строку адреса
             
            
@@ -48,6 +49,7 @@ OpenIp = IP()
 while OpenIp._storeIP < 255:
   storeIPRes = OpenIp.getIP(OpenIp._storeIP)
   print(OpenIp.SumStrIp(storeIPRes))
+  OpenIp._storeIP += 1 
   #print(CreateIP4(StrIp(storeIP)))
    
 
