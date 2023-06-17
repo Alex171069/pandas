@@ -7,7 +7,7 @@ class IP:
   def __init__ (self):
      
      self._tetra = dict()  # создаем ассоциативный словарь.    
-     self._tetra[1] = 0
+     self.extracted_method(0)
      self._tetra[2] = 0 
      self._tetra[3] = 0
      self._tetra[4] = 0 
@@ -25,17 +25,20 @@ class IP:
      return (str(self._storeIP))
         
   def SumStrIp(self,strIPAtom):
-       if   self._tetra[1] == 0:
-            self._tetra[1] = strIPAtom
-       elif self._tetra[2] == 0:
+       if  self._tetra[1] == 0 or self._tetra[1] <= self._tetra[2]: 
+            self.extracted_method(strIPAtom)
+       elif self._tetra[2] == 0 or self._tetra[2] <= self._tetra[3]:
             self._tetra[2] = strIPAtom
-       elif self._tetra[3] == 0:
+       elif self._tetra[3] == 0 or self._tetra[3] <= self._tetra[4]:
             self._tetra[3] = strIPAtom
-       elif self._tetra[4] == 0:
+       elif self._tetra[4] == 0 or self._tetra[4] < 255:
             self._tetra[4] = strIPAtom
-       else: 
-            
-          return str(self._tetra[4])+'.'+str(self._tetra[3])+'.'+str(self._tetra[2])+'.'+str(self._tetra[1])  # если все четыре тетрады не равны 0 то выводим всю строку адреса
+        
+       rOut = (str(self._tetra[4])+'.'+str(self._tetra[3])+'.'+str(self._tetra[2])+'.'+str(self._tetra[1])) 
+       return rOut  # если все четыре тетрады не равны 0 то выводим всю строку адреса
+
+  def extracted_method(self, strIPAtom):
+      self._tetra[1] = strIPAtom
             
            
         
