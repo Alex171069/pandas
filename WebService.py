@@ -1,23 +1,29 @@
 from flask import Flask
-import threading, time, timer
+from queue import Queue
+import threading, time
 import requests
-  
-app = Flask(__name__)
 
-def query_web():
-    response = requests.get("http://www.yandex.ru")
-    r = response.text              # .find('ядерная')
-    inS = r.find("ядерный") 
-   # print(r)
-    print(inS)
-web_qr = threading.Timer(100.0, query_web)
-web_qr.start()
-
+Req_string = ''
+queue1 = Queue() 
+def questS():
+    req = requests.get('http://www.yandex.ru')
+    if (req.status_code==200):
+        queue1.put(req.text)  
+    else:
+        queue1.put('ERROR PAGE')
+    req.close()
     
+app = Flask(__name__)
 @app.route('/')
-def index():
-    return "Hello, World!"
+def hello():
+    q_value = queue1.get()
+    return q_value
 
 
-if __name__ == '__main__': 
-    app.run(debug=False)
+if __name__ == "__main__":
+    t_global = threading.Timer(50.0, questS)
+    t_global.name = "Global Timer"
+    t_global.start()
+    app.run()
+    
+     
