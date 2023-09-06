@@ -2,17 +2,26 @@ from flask import Flask
   
 app = Flask(__name__)
 
+def doc():
+    return "DOC"
+
 @app.route('/')
 def index():
-    return "Hello, World!"
+    return "Главная!"
 
-<<<<<<< HEAD
 @app.route('/<username>')
 def show(username):
     return "Это "+ username
 
-=======
->>>>>>> 489cc25b10b64be9b11b059bea28c60b7e53e98c
+@app.route('/second/<int:id>')
+def second(id):
+    return "second"+" "+str(id)
+
+app.add_url_rule('/doc/',view_func=doc)
+
+def test():
+    return "привет"
+
 
 if __name__ == '__main__': 
     app.run(debug=True)
