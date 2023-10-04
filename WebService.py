@@ -27,6 +27,9 @@ def test():
 def db_search(search):
     return search
 
+def db_conection():
+    return 1 
+
 
 if __name__ == '__main__': 
     app.run(host='0.0.0.0', port=4567, debug=True)
